@@ -11,11 +11,11 @@ setuptools.setup(
     description='Python client library for ConnectWise Manage REST API',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/caeneb/pycwmanage',
+    url='https://github.com/marcusbevans/pycwmanage',
     project_urls={
-        "Bug Tracker": "https://github.com/caeneb/pycwmanage/issues",
-        "Documentation": "https://github.com/caeneb/pycwmanage#readme",
-        "Source Code": "https://github.com/caeneb/pycwmanage"
+        "Bug Tracker": "https://github.com/marcusbevans/pycwmanage/issues",
+        "Documentation": "https://github.com/marcusbevans/pycwmanage#readme",
+        "Source Code": "https://github.com/marcusbevans/pycwmanage"
     },
     license='MIT',
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),

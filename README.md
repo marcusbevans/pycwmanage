@@ -23,7 +23,7 @@ pip install pycwmanage
 Or install from source:
 
 ```bash
-git clone https://github.com/caeneb/pycwmanage.git
+git clone https://github.com/marcusbevans/pycwmanage.git
 cd pycwmanage
 pip install -e .
 ```
@@ -153,7 +153,7 @@ location_header = response.headers.get('Location')
 
 ```bash
 # Clone the repository
-git clone https://github.com/caeneb/pycwmanage.git
+git clone https://github.com/marcusbevans/pycwmanage.git
 cd pycwmanage
 
 # Create virtual environment
@@ -205,7 +205,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-If you encounter any issues or have questions, please [open an issue](https://github.com/caeneb/pycwmanage/issues) on GitHub.
+If you encounter any issues or have questions, please [open an issue](https://github.com/marcusbevans/pycwmanage/issues) on GitHub.
 
 ## Disclaimer
 

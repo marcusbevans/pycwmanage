@@ -43,10 +43,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/caeneb/pycwmanage"
-Documentation = "https://github.com/caeneb/pycwmanage#readme"
-"Bug Tracker" = "https://github.com/caeneb/pycwmanage/issues"
-"Source Code" = "https://github.com/caeneb/pycwmanage"
+Homepage = "https://github.com/marcusbevans/pycwmanage"
+Documentation = "https://github.com/marcusbevans/pycwmanage#readme"
+"Bug Tracker" = "https://github.com/marcusbevans/pycwmanage/issues"
+"Source Code" = "https://github.com/marcusbevans/pycwmanage"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
