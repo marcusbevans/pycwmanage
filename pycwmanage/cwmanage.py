@@ -91,7 +91,7 @@ class CWManage:
 
         return data
 
-    def get_all_pages_mt(self, endpoint: str, verbose: bool = False, log_endpoint: bool = False, return_response: bool = False):
+    def get_all_pages_mt(self, endpoint: str, worders: int = 10, verbose: bool = False, log_endpoint: bool = False, return_response: bool = False):
         """
         gets all pages of a given endpoint using multi-threading
         """
@@ -121,7 +121,7 @@ class CWManage:
         pages = range(1, int(last_page) + 1)
 
         results = []
-        with ThreadPoolExecutor() as executor:
+        with ThreadPoolExecutor(max_workers = workers) as executor:
             results.append(executor.map(
                 partial(get_page,
                         authorization=self._authorization(), page_url=page_url,
