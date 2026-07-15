@@ -105,8 +105,11 @@ class CWManage:
 
             if log_url:
                 logging.info(get_page_url)
-
-            return get_page_response if return_resp else get_page_response.json()
+            try:
+                return get_page_response if return_resp else get_page_response.json()
+            except Error as e:
+                logging.error(e)
+                return get_page_response
 
         # get last page information
         url = join_url(self._url, endpoint)
