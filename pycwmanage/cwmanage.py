@@ -16,6 +16,7 @@ class CWManage:
     private_key: str = field(repr=False)
     client_id: str = field(repr=False)
     _url: str = field(init=False)
+    page_size: int = 1000  # API default is 25, but supports up to 1000
 
     def __post_init__(self):
         object.__setattr__(self, '_url', self._get_url)
@@ -40,7 +41,11 @@ class CWManage:
     def get(self, endpoint: str, verbose: bool = False, log_endpoint: bool = False, return_response: bool = False):
         url = join_url(self._url, endpoint)
         try:
-            response = requests.get(url, headers=self._authorization())
+            response = requests.get(
+                url, 
+                headers=self._authorization(),
+                params={'pageSize': self.page_size}
+            )
         except requests.exceptions.ConnectionError as e:
             logging.error(f'Connection Error - {e}')
             return None if return_response else []
@@ -64,7 +69,11 @@ class CWManage:
             url = join_url(self._url, endpoint + f'&pagesize=50&page={page}')
         else:
             url = join_url(self._url, endpoint + f'?pagesize=50&page={page}')
-        response = requests.get(url, headers=self._authorization())
+        response = requests.get(
+            url, 
+            headers=self._authorization(),
+            params={'pageSize': self.page_size}
+        )
 
         if verbose:
             verbose_logging(response)
