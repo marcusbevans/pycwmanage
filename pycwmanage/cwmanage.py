@@ -100,9 +100,20 @@ class CWManage:
 
         return data
 
-    def get_all_pages_mt(self, endpoint: str, verbose: bool = False, log_endpoint: bool = False, return_response: bool = False):
+    def get_all_pages_mt(
+        self,
+        endpoint: str,
+        workers: int = 10,
+        verbose: bool = False,
+        log_endpoint: bool = False,
+        return_response: bool = False,
+    ):
         """
-        gets all pages of a given endpoint using multi-threading
+        Get all pages of a given endpoint using multi-threading.
+
+        ``workers`` is the ThreadPoolExecutor size (default 10).
+        Note: an earlier typo named this parameter ``worders`` while the body
+        used ``workers``, which raised NameError at runtime.
         """
         import re
         from concurrent.futures import ThreadPoolExecutor
@@ -114,8 +125,12 @@ class CWManage:
 
             if log_url:
                 logging.info(get_page_url)
-
-            return get_page_response if return_resp else get_page_response.json()
+            try:
+                return get_page_response if return_resp else get_page_response.json()
+            except ValueError as e:
+                # invalid JSON body
+                logging.error(e)
+                return get_page_response if return_resp else []
 
         # get last page information
         url = join_url(self._url, endpoint)
@@ -130,7 +145,7 @@ class CWManage:
         pages = range(1, int(last_page) + 1)
 
         results = []
-        with ThreadPoolExecutor() as executor:
+        with ThreadPoolExecutor(max_workers=workers) as executor:
             results.append(executor.map(
                 partial(get_page,
                         authorization=self._authorization(), page_url=page_url,
