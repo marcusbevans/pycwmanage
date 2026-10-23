@@ -4,7 +4,7 @@ import os
 import pytest
 from unittest.mock import Mock, patch, MagicMock
 from pycwmanage import CWManage
-from pycwmanage.cwmanage import join_url
+from pycwmanage.cwmanage import _join_url
 
 
 class TestCWManageBasic:
@@ -12,9 +12,9 @@ class TestCWManageBasic:
     
     def test_join_url(self):
         """Test the join_url utility function"""
-        assert join_url('https://test.com', 'subfolder', 'subsubfolder') == 'https://test.com/subfolder/subsubfolder'
-        assert join_url('https://test.com') == 'https://test.com'
-        assert join_url('https://test.com', '/api', 'endpoint') == 'https://test.com/api/endpoint'
+        assert _join_url('https://test.com', 'subfolder', 'subsubfolder') == 'https://test.com/subfolder/subsubfolder'
+        assert _join_url('https://test.com') == 'https://test.com'
+        assert _join_url('https://test.com', '/api', 'endpoint') == 'https://test.com/api/endpoint'
     
     @patch('pycwmanage.cwmanage.requests.get')
     def test_cw_manage_init(self, mock_get):
