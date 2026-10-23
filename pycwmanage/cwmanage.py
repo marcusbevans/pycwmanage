@@ -1,9 +1,9 @@
-import logging
 import json
-from base64 import b64encode
-from dataclasses import dataclass, field
+import logging
 from time import sleep
 from typing import Optional
+from base64 import b64encode
+from dataclasses import dataclass, field
 
 import requests
 
