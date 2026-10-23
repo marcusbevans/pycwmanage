@@ -177,7 +177,7 @@ class CWManage:
             params=params,
             verbose=verbose,
             log_endpoint=log_endpoint,
-            return_response=return_response
+            return_response=True
         )
 
         last = response.links.get('last')
@@ -236,7 +236,7 @@ class CWManage:
                 responses.append(result)
             return responses
 
-        data = []
+        data = response.json()
         for i, result in enumerate(results[0]):
             if log_endpoint:
                 logging.info(f'Page {i + 1}')
