@@ -123,7 +123,7 @@ class CWManage:
         from functools import partial
 
         def get_page(page: int, authorization: dict, page_url: str, log_url: bool = False, return_resp: bool = False):
-            get_page_response = requests.get(page_url, headers=authorization, params = {'page': page})
+            get_page_response = requests.get(page_url, headers=authorization, params={'pageSize': self.page_size, 'page': page})
 
             if log_url:
                 logging.info(get_page_url)
@@ -136,7 +136,7 @@ class CWManage:
 
         # get last page information
         url = join_url(self._url, endpoint)
-        response = requests.get(url, headers=self._authorization())
+        response = requests.get(url, headers=self._authorization(), params={"pageSize': self.page_size, 'page': 1})
         last = response.links.get('last')
         if last is None:
             logging.debug(f'No last page on {endpoint} to pull')
