@@ -110,7 +110,7 @@ class CWManage:
             params=params,
             verbose=verbose,
             log_endpoint=log_endpoint,
-            return_response=return_response
+            return_response=True
         )
 
         if verbose:
