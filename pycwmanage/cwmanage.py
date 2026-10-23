@@ -180,10 +180,18 @@ class CWManage:
             return_response=True
         )
 
+        if verbose:
+            _verbose_logging(response)
+        if log_endpoint:
+            logging.info(endpoint)
+
         last = response.links.get('last')
         if last is None:
             logging.debug(f'No last page on {endpoint} to pull')
-            return [] if not return_response else [response]
+            if return_response:
+                return [response]
+            else:
+                return response.json()
         last_url = last.get('url')
         last_page = re.search(r'page=(\d+)', last_url).group(1)
         pages = range(2, int(last_page) + 1)
