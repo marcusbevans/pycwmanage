@@ -66,13 +66,16 @@ class CWManage:
 
     def get_all_pages(self, endpoint: str, page: int = 0, verbose: bool = False, log_endpoint: bool = False, return_response: bool = False):
         if "?" in endpoint:
-            url = join_url(self._url, endpoint + f'&pagesize=50&page={page}')
+            url = join_url(self._url, endpoint)
         else:
-            url = join_url(self._url, endpoint + f'?pagesize=50&page={page}')
+            url = join_url(self._url, endpoint)
         response = requests.get(
             url, 
             headers=self._authorization(),
-            params={'pageSize': self.page_size}
+            params={
+                'pageSize': self.page_size,
+                'page': page,
+            }
         )
 
         if verbose:
@@ -120,8 +123,7 @@ class CWManage:
         from functools import partial
 
         def get_page(page: int, authorization: dict, page_url: str, log_url: bool = False, return_resp: bool = False):
-            get_page_url = f'{page_url}&page={page}'
-            get_page_response = requests.get(get_page_url, headers=authorization)
+            get_page_response = requests.get(page_url, headers=authorization, params = {'page': page})
 
             if log_url:
                 logging.info(get_page_url)
