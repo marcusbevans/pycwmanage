@@ -215,12 +215,17 @@ class CWManage:
 
             if log_url:
                 logging.info(endpoint)
-            try:
-                return get_page_response if return_resp else get_page_response.json()
-            except ValueError as e:
-                # invalid JSON body
-                logging.error(e)
-                return get_page_response if return_resp else []
+
+            if return_resp:
+                return get_page_response
+            else:
+                return get_page_response.json()
+            # try:
+            #     return get_page_response if return_resp else get_page_response.json()
+            # except ValueError as e:
+            #     # invalid JSON body
+            #     logging.error(e)
+            #     return get_page_response if return_resp else []
 
         results = []
         with ThreadPoolExecutor(max_workers=workers) as executor:
