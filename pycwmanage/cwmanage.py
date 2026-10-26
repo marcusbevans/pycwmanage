@@ -217,9 +217,9 @@ class CWManage:
                 logging.info(endpoint)
 
             if return_resp:
-                return get_page_response
-            else:
                 return get_page_response.json()
+            else:
+                return get_page_response
             # try:
             #     return get_page_response if return_resp else get_page_response.json()
             # except ValueError as e:
